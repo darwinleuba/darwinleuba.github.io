@@ -18,7 +18,17 @@
 <body>
 
 	<h1> KELLOGS STRIKE APP </h1>
-	<b1> https://ourcodeworld.com/articles/read/460/how-to-create-a-live-barcode-scanner-using-the-webcam-in-javascript </b1>
+	<b1> The barcode is: </b1>
+
+	<b1 id="code">No Barcode Detected Yet</b1>
+
+    <p> </p>
+
+    <b1> Should it be boycotted? </b1>
+
+    <b1 id="boycott_display">No Barcode Detected Yet</b1>
+
+
     <!-- Div to show the scanner -->
     <div id="scanner-container"></div>
     <input type="button" id="btn" value="Start/Stop the scanner" />
@@ -105,6 +115,18 @@
 
             Quagga.onDetected(function (result) {
                 console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+                document.getElementById("code").innerHTML = result.codeResult.code;
+                
+
+                if (result.codeResult.code == "767563198352"){
+                    document.getElementById("boycott_display").innerHTML = "DO NOT BUY. These are Kellogg's Cheez-Its"
+                }
+                else{
+                    document.getElementById("boycott_display").innerHTML = "Probably okay to purchase. Not a Kellog's Product."
+                }
+
+                Quagga.stop();
+                _scannerIsRunning = false;
             });
         }
 
@@ -118,6 +140,10 @@
             }
         }, false);
     </script>
+
+        <p> </p>
+
+        <b1> SOURCE: https://ourcodeworld.com/articles/read/460/how-to-create-a-live-barcode-scanner-using-the-webcam-in-javascript </b1>
 </body>
 
 </html>
